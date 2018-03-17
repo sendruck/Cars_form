@@ -10,7 +10,7 @@ $(document).ready(function(){
 			var i = 0;
 			if (data) {
 				while (data[i]) {
-					$('table').append('<tr class="animated fadeIn"><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
+					$('table').append('<tr class="animated fadeIn"><td><div class="delete_btn"></div></td><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
 					$('.color-col-'+i+'').append('<div class="color-blck"></div>');
 					$('.color-col-'+i+' .color-blck').css('background', data[i].color);
 					$('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
@@ -18,13 +18,14 @@ $(document).ready(function(){
 				}
 				$('#wrapper').css("display", "none");
 			} else {
+				$(".right-block").addClass ("empty-div" );
 				$('table').after( '<p class="empty animated fadeIn">Поки що немає жодного автомобіля)</p>');
 			}
 		}
 	});
 
 	$("input[type='button']").on("click", function() {
-		$('p.empty').addClass("animated fadeOut");
+		$('p.empty').css("display", "none");
 		$('#wrapper').addClass("animated bounceOutLeft");
 		manageData('addnew');
 	})
@@ -64,8 +65,9 @@ $(document).ready(function(){
 					cena: cena.val()
 				}, success: function (response) {
 					var data = $.parseJSON(response);	
-					var i =  $('table').children().length;				
-					$('table').append( '<tr class="animated fadeIn"><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
+					var i =  $('table').children().length;	
+					$(".right-block").removeClass("empty-div" );			
+					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn"></div></td><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
 					setTimeout(function() {
 						$('.color-col-'+i+'').append('<div class="color-blck"></div>');
 						$('.color-col-'+i+' .color-blck').css('background', data.color);
@@ -97,5 +99,6 @@ $(document).ready(function(){
 			return true;
 		}
 	}
+
 
 })

@@ -97,7 +97,12 @@ body {
       position: relative;
       margin-top: 11px;
       flex-basis: 40%;
-      padding: 20px 15px;
+      padding: 20px 30px;
+      padding-left: 3px;  
+  }
+
+  .empty-div {
+    padding-left: 30px!important;
   }
 
   table {
@@ -105,12 +110,12 @@ body {
     border-collapse: collapse;
   }
 
-  tr {
+  tr th:not(:first-child) {
     border: 1px solid #bebed2;
     transition: all 0.3ms;
   }
 
-  th {
+  th:not(:first-child) {
     font-size: 16px;
     background: #afafb8;
     border-right: 1px solid #d7d7ef!important;
@@ -130,20 +135,24 @@ body {
     animation: slide-up 0.5s ease;
   }
 
-  tr:hover {
+  tr:hover td:not(:first-child) {
     background: #ceceda;
   }
 
-  thead th:hover {
+  tr:hover td:nth-child(2) {
+    border-left: 1px solid #9b9bac!important;
+  }
+
+  thead th:hover:not(:first-child) {
     background: #afafb8;
   }
 
-  td, th {
+  td:not(:first-child), th:not(:first-child)  {
     text-align: center;
     border: 1px solid #bebed2;
   }
 
-  tr:hover td {
+  tr:hover td:not(:first-child) {
     border: 1px solid #9b9bac;
   }
 
@@ -165,11 +174,38 @@ body {
     border-top: 0px;
     padding-top: 8px;
     padding-bottom: 8px;
+    position: relative;
+    left: 2px;
+    width: 99%;
 }
 
 .empty-box {
   position: relative;
   top: 60px;
+}
+
+.delete_btn {
+    background: url('../img/delete.svg');
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 3px;
+    left: 4px;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+}
+
+tr:hover .delete_btn {
+  opacity: 1;
+}
+
+.delete_btn:hover, .delete_btn:focus, .delete_btn:active {
+  background: url('../img/delete_hover.svg');
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  position: relative;
+  top: 3px;
 }
 
 
