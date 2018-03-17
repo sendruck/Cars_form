@@ -139,6 +139,7 @@ body {
     background: #ceceda;
   }
 
+
   tr:hover td:nth-child(2) {
     border-left: 1px solid #9b9bac!important;
   }
@@ -154,6 +155,10 @@ body {
 
   tr:hover td:not(:first-child) {
     border: 1px solid #9b9bac;
+  }
+
+  tr:hover td:first-child {
+    border-right: 1px solid #9b9bac;
   }
 
   .color-blck {
@@ -193,6 +198,8 @@ body {
     left: 4px;
     opacity: 0;
     transition: all 0.4s ease-in;
+    display: block;
+    z-index: 100000;
 }
 
 tr:hover .delete_btn {
@@ -206,6 +213,9 @@ tr:hover .delete_btn {
   left: 4px;
   position: relative;
   top: 3px;
+  display: block;
+  cursor: pointer;
+  z-index: 10000;
 }
 
 

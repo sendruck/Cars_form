@@ -29,7 +29,11 @@ $(document).ready(function(){
 		$('#wrapper').addClass("animated bounceOutLeft");
 		manageData('addnew');
 	})
+	
 
+	$("body").on("click", ".delete_btn", function() {
+		console.log("row is deleted");
+	})
 
 	$("body").on("click", function() {
 		if ($("input").is(":focus")) {
@@ -38,6 +42,7 @@ $(document).ready(function(){
 			$(".left-block form").css('box-shadow', '')
 		}
 	})
+	
 	
 
 	function manageData(key) {
@@ -99,6 +104,8 @@ $(document).ready(function(){
 			return true;
 		}
 	}
+
+
 
 
 })
