@@ -305,7 +305,7 @@ tr:hover .delete_btn {
 }
 
 #wrapper {
-  display: none;
+  opacity: 0;
   position: absolute;
   width: 150px;
   height: 100px;
@@ -313,6 +313,7 @@ tr:hover .delete_btn {
   top: 70%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
+  transition: opacity 1s ease-in;
 }
 
 .empty-img {
@@ -339,7 +340,7 @@ tr:hover .delete_btn {
 #smoke {
   width: 10px;
   position: absolute;
-  right: 50px;
+  right: 20px;
   top: 30px;
   animation: smoke 1.2s linear infinite;
   -webkit-animation: smoke 1s linear infinite;
@@ -377,7 +378,7 @@ tr:hover .delete_btn {
 }
 @keyframes smoke {
   from {
-    right: 50px;
+    right: 20px;
   }
   to {
     right: -80px;
@@ -385,7 +386,7 @@ tr:hover .delete_btn {
     opacity: .2;
   }
 }
-@-webkit-keyframes smoke {
+/* @-webkit-keyframes smoke {
   from {
     right: 50px;
   }
@@ -393,7 +394,7 @@ tr:hover .delete_btn {
     right: -80px;
     transform: scale(5);
     opacity: .2;
-  }
+  } */
 }
 
 

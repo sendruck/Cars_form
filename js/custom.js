@@ -18,11 +18,11 @@ $(document).ready(function(){
 					ids[i]= data[i].id;
 					i++;
 				}
-				$('#wrapper').css("display", "none");
+				$('#wrapper').css("opacity", "0");
 			} else {
 				$(".right-block").addClass ("empty-div" );
 				$('table').after( '<p class="empty animated fadeIn">Поки що немає жодного автомобіля)</p>');
-				$("#wrapper").css("display", "block");
+				$("#wrapper").css("opacity", "1");
 			}
 		}
 	});
@@ -69,7 +69,10 @@ $(document).ready(function(){
 					var data = $.parseJSON(response);	
 					var i =  $('table').children().length;	
 					$('p.empty').css("display", "none");
-					$('#wrapper').addClass("animated bounceOutLeft");
+					if (i == 1) {
+						$('#wrapper').addClass("animated bounceOutLeft");
+						// $('#wrapper').css("opacity", "0");
+					}
 					$(".right-block").removeClass("empty-div" );			
 					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn" id="'+data.id+'"></div></td><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
 					setTimeout(function() {
@@ -132,7 +135,9 @@ $(document).ready(function(){
 						  .slideUp(function() { $(this).closest('tr').remove(); });
 					$(".right-block").addClass ("empty-div" );
 					$('table').after( '<p class="empty animated fadeIn">Поки що немає жодного автомобіля)</p>');
-					$("#wrapper").css("display", "block");
+					$("#wrapper").css({"left":"37%", "height":"50px", "opacity":"1"});
+					$("#smoke").css("width", "0");
+					$('#wrapper').addClass("animated bounceInRight");
 				 };
              }
  
