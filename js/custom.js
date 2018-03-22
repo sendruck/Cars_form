@@ -14,6 +14,7 @@ $(document).ready(function(){
 					$('table').append('<tr class=""><td><div class="delete_btn" id="'+data[i].id+'"></div></td><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
 					$('.color-col-'+i+'').append('<div class="color-blck"></div>');
 					$('.color-col-'+i+' .color-blck').css('background', data[i].color);
+					$("td:not(:first-child)").append("<img src='img/edit.png'>");
 					// $('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
 					ids[i]= data[i].id;
 					i++;
@@ -144,8 +145,6 @@ $(document).ready(function(){
 		});	
 
 	})
-
-
 
 
 })
