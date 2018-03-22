@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var ids = [];
 	$.ajax({
 		url: 'ajax.php',
 		method: 'GET',
@@ -10,30 +11,26 @@ $(document).ready(function(){
 			var i = 0;
 			if (data) {
 				while (data[i]) {
-					$('table').append('<tr class="animated fadeIn"><td><div class="delete_btn"></div></td><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
+					$('table').append('<tr class=""><td><div class="delete_btn" id="'+data[i].id+'"></div></td><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
 					$('.color-col-'+i+'').append('<div class="color-blck"></div>');
 					$('.color-col-'+i+' .color-blck').css('background', data[i].color);
-					$('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
+					// $('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
+					ids[i]= data[i].id;
 					i++;
 				}
 				$('#wrapper').css("display", "none");
 			} else {
 				$(".right-block").addClass ("empty-div" );
 				$('table').after( '<p class="empty animated fadeIn">Поки що немає жодного автомобіля)</p>');
+				$("#wrapper").css("display", "block");
 			}
 		}
 	});
 
 	$("input[type='button']").on("click", function() {
-		$('p.empty').css("display", "none");
-		$('#wrapper').addClass("animated bounceOutLeft");
 		manageData('addnew');
 	})
 	
-
-	$("body").on("click", ".delete_btn", function() {
-		console.log("row is deleted");
-	})
 
 	$("body").on("click", function() {
 		if ($("input").is(":focus")) {
@@ -71,13 +68,18 @@ $(document).ready(function(){
 				}, success: function (response) {
 					var data = $.parseJSON(response);	
 					var i =  $('table').children().length;	
+					$('p.empty').css("display", "none");
+					$('#wrapper').addClass("animated bounceOutLeft");
 					$(".right-block").removeClass("empty-div" );			
-					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn"></div></td><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
+					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn" id="'+data.id+'"></div></td><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
 					setTimeout(function() {
 						$('.color-col-'+i+'').append('<div class="color-blck"></div>');
 						$('.color-col-'+i+' .color-blck').css('background', data.color);
 						$('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
 					}, 400);
+					setTimeout(function() {
+						location.reload();
+					}, 1000);
 					model.val('');
 					marka.val('');
 					year.val('');
@@ -104,6 +106,39 @@ $(document).ready(function(){
 			return true;
 		}
 	}
+
+
+	$("body").on("click", ".delete_btn", function() {
+		var id= $(this).attr('id');
+		var parent = $(this).parent().parent();
+		$.ajax({
+            type:'POST',
+            url:'delete.php',
+            data:{
+				"del_id" : id
+			},
+            success: function(data){
+                if ( data > ids[0] ) {
+					parent.children('td')
+						  .animate({ padding: 0 })
+						  .wrapInner('<div />')
+						  .children()
+						  .slideUp(function() { $(this).closest('tr').remove(); });
+                 } else { 
+					parent.children('td')
+						  .animate({ padding: 0 })
+						  .wrapInner('<div />')
+						  .children()
+						  .slideUp(function() { $(this).closest('tr').remove(); });
+					$(".right-block").addClass ("empty-div" );
+					$('table').after( '<p class="empty animated fadeIn">Поки що немає жодного автомобіля)</p>');
+					$("#wrapper").css("display", "block");
+				 };
+             }
+ 
+		});	
+
+	})
 
 
 

@@ -42,7 +42,7 @@
 
         if ($_GET['key'] == 'get_all') {
 
-            $allData = mysqli_query($con, 'SELECT * FROM `cars` ORDER BY id DESC');
+            $allData = mysqli_query($con, 'SELECT * FROM `cars` ORDER BY id ASC');
             if (mysqli_num_rows($allData) > 0) {
                 $reponse = array();
                 $n = 0; 

@@ -96,17 +96,17 @@ body {
       transition: box-shadow 0.5s;
       position: relative;
       margin-top: 11px;
-      flex-basis: 40%;
+      flex-basis: 45%;
       padding: 20px 30px;
       padding-left: 3px;  
   }
 
   .empty-div {
-    padding-left: 30px!important;
+    padding-left: 27px!important;
   }
 
   table {
-    width: 100%;
+    width: 607px;
     border-collapse: collapse;
   }
 
@@ -138,6 +138,7 @@ body {
   tr:hover td:not(:first-child) {
     background: #ceceda;
   }
+
 
 
   tr:hover td:nth-child(2) {
@@ -180,8 +181,8 @@ body {
     padding-top: 8px;
     padding-bottom: 8px;
     position: relative;
-    left: 2px;
-    width: 99%;
+    left: 3px;
+    width: 601px;
 }
 
 .empty-box {
@@ -304,6 +305,7 @@ tr:hover .delete_btn {
 }
 
 #wrapper {
+  display: none;
   position: absolute;
   width: 150px;
   height: 100px;
@@ -311,6 +313,10 @@ tr:hover .delete_btn {
   top: 70%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
+}
+
+.empty-img {
+  left: 40%!important;
 }
 
 #car-body {
