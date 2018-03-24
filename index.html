@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.0/anime.min.js">
 </head>
     <body>
@@ -32,13 +33,20 @@
                     <p type="Потужність двигуна:">
                         <input placeholder="Вкажіть потужність двигуна.." name="engine" type="number"></input>
                     </p>
-                    <p type="Колір:" class="color">
-                        <input placeholder="Оберіть колір авто.." name="color" type="color" value="#ff0000"></input>
-                    </p>
+                    <div class="color-wrapper">
+                        <p type="Колір:" class="color" id="color">
+                            <div id="colorSelector">
+                                <div></div>
+                            </div>
+                        </p>
+                    </div>
                     <p type="Ціна:">
                         <input placeholder="Вкажіть бажану ціну.." name="cena" type="number"></input>
                     </p>
-                    <input type="button" name="save" value="Зберегти">
+                    <div class="submit-btns">
+                        <input type="button" name="update" value="Змінити">
+                        <input type="button" name="save" value="Зберегти">
+                    </div>
                 </form>
             </div>
     
@@ -192,5 +200,6 @@
         <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>		
         <script type="text/javascript" src="js/jquery-migrate-1.4.1.min.js" ></script>
         <script type="text/javascript" src="js/custom.js" ></script>
+        <script type="text/javascript" src="js/colorpicker.js"></script>
     </body>
 </html>

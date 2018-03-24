@@ -20,6 +20,30 @@ body {
     transition: box-shadow 0.5s;
   }
 
+  #colorSelector {
+    display: inline-block;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    top: 11px;
+    cursor: pointer;
+    background: url("../images/select.png");
+  }
+
+  #colorSelector div {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 30px;
+    height: 30px;
+    background: url("../images/select.png") center;
+}
+
+.color-wrapper {
+  border-bottom: 2px solid #bebed2;
+  height: 65px;
+}
+
   .left-block .form:hover, .left-block .form:focus {
     box-shadow: 0 0 40px -10px #000;
   }
@@ -29,8 +53,10 @@ body {
     animation: shadow-up 0.5s ease;
   }
 
-  /* form.updated-form:focus {
-  } */
+form.updated-form:hover {
+    box-shadow: 11px 12px 40px -10px #000000!important;
+}
+
 
 .left-block  h2 {
     margin: 10px 0;
@@ -54,8 +80,12 @@ body {
     border-bottom: 2px solid #78788c!important;
   }
 
-.left-block .updated-form input:focus {
+.left-block .updated-form input:not([name="update"]):focus {
   border-bottom: 2px solid #d0cc57!important;
+}
+
+.updated-form input#color-input:focus {
+  border-bottom: none!important;
 }
 .left-block  input[type="color"] {
       width: 30%!important;
@@ -64,8 +94,10 @@ body {
       cursor: pointer;
   }
 .left-block p.color {
-    border-bottom: 2px solid #bebed2;
-    transition: all 0.3s;
+    /* border-bottom: 2px solid #bebed2;
+    transition: all 0.3s; */
+    display: inline-block;
+    margin-right: 15px;
 }
 
 .left-block  p:before {
@@ -75,17 +107,29 @@ body {
     font-size: 14px;
     color: #5a5a5a;
   }
-.left-block  input[type="button"] {
+.submit-btns {
+  display: flex;
+  justify-content: space-between;
+}
+.left-block  input[name="save"], .left-block  input[name="update"] {
     float: right;
     padding: 8px 12px;
-    width: 140px;
+    width: 120px;
     margin: 8px 0 0;
     border: 2px solid #78788c;
     background: 0;
     color: #5a5a6e;
     cursor: pointer;
-    transition: all 0.3s;
   }
+.left-block  input[name="save"] {
+  transition: opacity 0.4s, background 0.3s;
+}
+.left-block  input[name="update"] {
+  opacity: 0;
+  z-index: -10;
+  transition: opacity 0.4s, background 0.3s;
+}
+
 .left-block  input[type="button"]:hover {
     background: #78788c;
     color: #fff;
@@ -211,6 +255,7 @@ body {
   td:not(:first-child), th:not(:first-child)  {
     text-align: center;
     border: 1px solid #bebed2;
+    z-index: 100;
   }
 
   tr:hover td:not(:first-child) {
@@ -240,8 +285,8 @@ body {
     padding-top: 8px;
     padding-bottom: 8px;
     position: relative;
-    left: 30px;
-    width: 574px;
+    left: 33px;
+    width: 571px;
 }
 
 .empty-box {
