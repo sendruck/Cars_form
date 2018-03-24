@@ -101,9 +101,9 @@ body {
       padding-left: 3px;  
   }
 
-  .empty-div {
+  /* .empty-div {
     padding-left: 27px!important;
-  }
+  } */
 
   table {
     width: 607px;
@@ -123,6 +123,10 @@ body {
 
   th:last-child {
     border-left: none;
+  }
+
+  th:first-child {
+    visibility: hidden;
   }
 
   td {
@@ -203,8 +207,8 @@ body {
     padding-top: 8px;
     padding-bottom: 8px;
     position: relative;
-    left: 3px;
-    width: 601px;
+    left: 32px;
+    width: 572px;
 }
 
 .empty-box {
