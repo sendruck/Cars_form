@@ -11,11 +11,10 @@ $(document).ready(function(){
 			var i = 0;
 			if (data) {
 				while (data[i]) {
-					$('table').append('<tr class=""><td><div class="delete_btn" id="'+data[i].id+'"></div></td><td>'+data[i].model+'</td><td>'+data[i].marka+'</td><td>'+data[i].year+'</td><td>'+data[i].type+'</td><td>'+data[i].engine+'</td><td class="color-col-'+i+'"></td><td>'+data[i].cena+'</td></tr>' );
+					$('table').append('<tr class=""><td><div class="delete_btn" id="'+data[i].id+'"></div></td><td class="model-cell">'+data[i].model+'</td><td class="marka-cell">'+data[i].marka+'</td><td class="year-cell">'+data[i].year+'</td><td class="type-cell">'+data[i].type+'</td><td class="engine-cell">'+data[i].engine+'</td><td class="color-cell color-col-'+i+'"></td><td class="cena-cell">'+data[i].cena+'</td></tr>' );
 					$('.color-col-'+i+'').append('<div class="color-blck"></div>');
-					$('.color-col-'+i+' .color-blck').css('background', data[i].color);
+					$('.color-col-'+i+' .color-blck').css('backgroundColor', data[i].color);
 					$("td:not(:first-child)").append("<img src='img/edit.png'>");
-					// $('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
 					ids[i]= data[i].id;
 					i++;
 				}
@@ -33,13 +32,32 @@ $(document).ready(function(){
 	})
 	
 
-	$("body").on("click", function() {
+	$("body").on("click", function(e) {
 		if ($("input").is(":focus")) {
-			$(".left-block form").css('box-shadow', '0 0 40px -10px #000')
+			$(".left-block form:not(.updated-form)").css('box-shadow', '0 0 40px -10px #000')
 		} else {
 			$(".left-block form").css('box-shadow', '')
 		}
+		if (($(e.target).closest("td:not(:first-child)").length > 0) || ($(e.target).closest("form.updated-form").length > 0)) {
+			return false;
+		} else 	
+		if ($("td:not(:first-child)").hasClass("update-cell")) {
+			$("td:not(:first-child)").removeClass("update-cell");
+			$("form.form").removeClass("updated-form");
+			$("form.form input:not(input[name='color'])").not("input[name='save']").val("");
+		} 
 	})
+
+
+
+
+	function rgb2hex(orig){
+		var rgb = orig.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+		return (rgb && rgb.length === 4) ? "#" +
+		 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : orig;
+	   }
 	
 	
 
@@ -75,10 +93,10 @@ $(document).ready(function(){
 						// $('#wrapper').css("opacity", "0");
 					}
 					$(".right-block").removeClass("empty-div" );			
-					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn" id="'+data.id+'"></div></td><td>'+data.model+'</td><td>'+data.marka+'</td><td>'+data.year+'</td><td>'+data.type+'</td><td>'+data.engine+'</td><td class="color-col-'+i+'"></td><td>'+data.cena+'</td></tr>' );
+					$('table').append( '<tr class="animated fadeIn"><td><div class="delete_btn" id="'+data.id+'"></div></td><td class="model-cell">'+data.model+'</td><td class="marka-cell">'+data.marka+'</td><td class="year-cell">'+data.year+'</td><td class="type-cell">'+data.type+'</td><td class="engine-cell">'+data.engine+'</td><td class="color-cell color-col-'+i+'"></td><td class="cena-cell">'+data.cena+'</td></tr>' );
 					setTimeout(function() {
 						$('.color-col-'+i+'').append('<div class="color-blck"></div>');
-						$('.color-col-'+i+' .color-blck').css('background', data.color);
+						$('.color-col-'+i+' .color-blck').css('backgroundColor', data.color);
 						$('.color-col-'+i+' .color-blck').addClass("animated jackInTheBox");
 					}, 400);
 					setTimeout(function() {
@@ -144,7 +162,94 @@ $(document).ready(function(){
  
 		});	
 
-	})
+	});
 
+
+
+	$("body").on("click", "td:not(:first-child)", function() {
+		$("td:not(:first-child)").not(this).removeClass("update-cell");
+		if ($(this).hasClass("update-cell")) {
+			$(this).removeClass("update-cell");
+			$("form.form input:not(input[name='color'])").not("input[name='save']").val("");
+		} else {
+		$(this).toggleClass("update-cell");
+		var model = $(this).parent().find("td:nth-child(2)").text();
+		var marka = $(this).parent().find("td:nth-child(3)").text();
+		var year = $(this).parent().find("td:nth-child(4)").text();
+		var type = $(this).parent().find("td:nth-child(5)").text();
+		var engine = $(this).parent().find("td:nth-child(6)").text();
+		var color = $(this).parent().find(".color-blck").css("backgroundColor");
+		var cina = $(this).parent().find("td:nth-child(8)").text();
+		var hex_color = rgb2hex(color);
+
+		$("form.form").addClass("updated-form");
+		switch($(this).attr("class").split(' ')[0]) {
+			case 'model-cell': 
+				$("form.form").find("input[name='model']").focus().val(model);
+				$("form.form").find("input[name='model']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='model']").focus().removeClass('animated pulse');
+				}, 1500); 
+				break;
+
+			case 'marka-cell': 
+				$("form.form").find("input[name='marka']").focus().val(marka);
+				$("form.form").find("input[name='marka']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='marka']").focus().removeClass('animated pulse');
+				}, 1500); 
+				  break;
+				
+			case 'year-cell': 
+				$("form.form").find("input[name='year']").focus().val(year);
+				$("form.form").find("input[name='year']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='year']").focus().removeClass('animated pulse');
+				}, 1500); 
+				break;
+
+			case 'type-cell': 
+				$("form.form").find("input[name='type']").focus().val(type);
+				$("form.form").find("input[name='type']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='type']").focus().removeClass('animated pulse');
+				}, 1500); 
+				break;
+
+			case 'engine-cell': 
+				$("form.form").find("input[name='engine']").focus().val(engine);
+				$("form.form").find("input[name='engine']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='engine']").focus().removeClass('animated pulse');
+				}, 1500); 
+				break;
+
+			case 'color-cell': 
+				$("form.form").find("input[name='color']").attr("value", hex_color);
+				$("form.form").find("input[name='color']").addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='color']").removeClass('animated pulse');
+				}, 1500); 
+				break;
+
+			case 'cena-cell': 
+				$("form.form").find("input[name='cena']").focus().val(cina);
+				$("form.form").find("input[name='cena']").focus().addClass("animated pulse");
+				window.setTimeout( function(){
+					$("form.form").find("input[name='cena']").focus().removeClass('animated pulse');
+				}, 1500); 
+				break;
+		  }
+
+		$("form.form").find("input[name='model']").val(model);
+		$("form.form").find("input[name='marka']").val(marka);
+		$("form.form").find("input[name='year']").val(year);
+		$("form.form").find("input[name='type']").val(type);
+		$("form.form").find("input[name='engine']").val(engine);
+		$("form.form").find("input[name='color']").attr("value", hex_color);
+		$("form.form").find("input[name='cena']").val(cina);
+		}
+
+	})
 
 })
