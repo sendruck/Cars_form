@@ -308,18 +308,24 @@ $(document).ready(function(){
 					var data = $.parseJSON(response);	
 					console.log(data.model);
 					$("#"+id).parent().parent().find(".model-cell").text(data.model).addClass("animated tada");
+					$("#"+id).parent().parent().find(".model-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".model-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".marka-cell").text(data.marka).addClass("animated tada");
+					$("#"+id).parent().parent().find(".marka-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".marka-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".year-cell").text(data.year).addClass("animated tada");
+					$("#"+id).parent().parent().find(".year-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".year-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".type-cell").text(data.type).addClass("animated tada");
+					$("#"+id).parent().parent().find(".type-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".type-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".engine-cell").text(data.engine).addClass("animated tada");
+					$("#"+id).parent().parent().find(".engine-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".engine-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".color-blck").css("backgroundColor", data.color).addClass("animated tada");
 					$("#"+id).parent().parent().find(".color-cell").append("<img src='img/edit.png'>");
 					$("#"+id).parent().parent().find(".cena-cell").text(data.cena).addClass("animated tada");
+					$("#"+id).parent().parent().find(".cena-cell").css("color", "#8f9200");
 					$("#"+id).parent().parent().find(".cena-cell").append("<img src='img/edit.png'>");
 					window.setTimeout( function(){
 						$("#"+id).parent().parent().find(".model-cell").removeClass('animated tada');
@@ -329,6 +335,15 @@ $(document).ready(function(){
 						$("#"+id).parent().parent().find(".engine-cell").removeClass('animated tada');
 						$("#"+id).parent().parent().find(".color-cell").removeClass('animated tada');
 						$("#"+id).parent().parent().find(".cena-cell").removeClass('animated tada');
+
+						$("#"+id).parent().parent().find(".model-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".marka-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".year-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".type-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".engine-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".color-cell").css("color", "#000000");
+						$("#"+id).parent().parent().find(".cena-cell").css("color", "#000000");
+
 					}, 1200); 
 
 					model.val('');
